@@ -4,12 +4,13 @@ from django.conf import settings
 from django.views.generic import ListView, DetailView
 from .models import Post, Category, Post_Gallery
 
+
 # Create your views here.
 
 class CategoryList:
     def get_category(self):
-        return Category.objects.all()
-
+        if len(Category.objects.all()) >= 1:
+            return Category.objects.all()
 
 
 class Post_by_Cat(ListView, CategoryList):
@@ -17,8 +18,18 @@ class Post_by_Cat(ListView, CategoryList):
     template_name = "blog/blog-portfolio.html"
     ordering = ['-post_date']
 
-    def get_queryset(self):
-        return Post.objects.filter(category__slug=self.kwargs.get('slug')).filter(status=True)
+    # def get_queryset(self):
+    #     return Post.objects.filter(category__slug=self.kwargs.get('slug')).filter(status=True)
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(Post_by_Cat, self).get_context_data(*args, **kwargs)
+
+        if len(Post.objects.filter(category__slug=self.kwargs.get('slug')).filter(status=True)) >= 1:
+            context['post_list'] = Post.objects.filter(category__slug=self.kwargs.get('slug')).filter(status=True)
+        else:
+            context['post_list'] = Post.objects.all()
+
+        return context
 
 
 class Post_Detail(DetailView):
