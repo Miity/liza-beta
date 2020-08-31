@@ -16,7 +16,6 @@ eggs/
 .eggs/
 lib/
 lib64/
-parts/
 sdist/
 var/
 wheels/
@@ -145,3 +144,5 @@ db.sqlite3
 .DS_Store
 .idea/
 media/
+lizabeta/settings_prod.py
+lizabeta/settings_prod1.py

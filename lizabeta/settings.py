@@ -205,3 +205,9 @@ CKEDITOR_CONFIGS = {
                 ]),
     },
 }
+
+
+try:
+    from .settings_prod import *
+except:
+    pass
