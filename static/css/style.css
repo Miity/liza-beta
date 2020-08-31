@@ -1,0 +1,60 @@
+body {
+    font-family: 'Comfortaa', cursive;
+    font-size: 14px;
+    background-color: #fff;
+    color: #666;
+    font-weight: 500;
+    line-height: 2em;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: 'Oswald', sans-serif;
+}
+
+a {
+    color: #3f454e
+}
+p {
+    vertical-align: baseline;
+}
+
+
+
+.sidebar {
+    background-color: rgba(193,208,212,0.5)!important;
+}
+
+.icon {
+    color:#666;
+}
+.icon:hover {
+    font-size: 20px;
+}
+
+/*** Customiz bootstrap ***/
+
+.nav-link.active, .btn-info {
+    background-color: #f9f3ee!important;
+
+    border-color: #f9f3ee!important;
+
+    color: #666!important;
+}
+
+/**** Customize ****/
+.logo {
+    font-family: 'Comfortaa', cursive;
+    font-weight: 600;
+}
+
+.sidebar nav>a:hover {
+    font-weight: normal;
+    font-size: 16px;
+    color: #666!important;
+}
+
+nav>a:hover {
+    font-weight: bold;
+    color: #666!important;
+}

@@ -1,0 +1,10 @@
+django==3.0.7
+jinja2==2.11.2
+Pillow==7.2.0
+django_bootstrap4==2.1.1
+django_ckeditor==5.9.0
+django_fontawesome_5==1.0.18
+django_imagekit==4.0.2
+django_import_export==2.3.0
+django_js_asset==1.2.2
+python-dateutil==2.8.1
