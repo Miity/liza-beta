@@ -2,7 +2,7 @@ from django.db import models
 from django.urls import reverse
 from ckeditor_uploader.fields import RichTextUploadingField
 from imagekit.models import ImageSpecField
-from pilkit.processors import Thumbnail
+from pilkit.processors import Thumbnail, ResizeToFill,ResizeToFit
 
 
 # Create your models here.
@@ -34,7 +34,7 @@ class Post(models.Model):
                                  )
     image = models.ImageField("Главное фото", null=True, blank=True, upload_to=image_dir)
     image_small = ImageSpecField(source='image',
-                                 processors=[Thumbnail(400, 400)],
+                                 processors=[Thumbnail(width=400, height=None)],
                                  format='JPEG',
                                  options={'quality': 60})
     title = models.CharField("Название", max_length=200)
@@ -61,11 +61,11 @@ class Post_Gallery(models.Model):
     post = models.ForeignKey(Post, default=None, on_delete=models.CASCADE)
     image = models.ImageField(upload_to=gallery_dir)
     image_medium = ImageSpecField(source='image',
-                                 processors=[Thumbnail(800, 800)],
+                                 processors=[Thumbnail(700),],
                                  format='JPEG',
                                  options={'quality': 60})
     image_small = ImageSpecField(source='image',
-                                 processors=[Thumbnail(150, 150)],
+                                 processors=[Thumbnail(150)],
                                  format='JPEG',
                                  options={'quality': 30})
 

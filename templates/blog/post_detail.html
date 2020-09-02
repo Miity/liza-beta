@@ -17,7 +17,7 @@
             <span class="small"><a href="{% url 'category' slug=post.category.slug %}">{{ post.category }}</a></span> |
             <span class="small">Опубликованно: {{ post.post_date }}</span>
             {% if user.is_authenticated and user.is_superuser %}
-            | <span class="small"><a href="http://127.0.0.1:8000/admin/blog/post/{{post.id}}/change/" >Edit in admin</a></span>
+            | <span class="small"><a href="/admin/blog/post/{{post.id}}/change/" >Edit in admin</a></span>
             {% endif %}
         </div>
     </div>

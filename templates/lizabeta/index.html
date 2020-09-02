@@ -1,43 +1,6 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="row mt-md-5 mb-md-3">
-    <div class="col-12 my-3 pl-5">
-        {% if categories %}
-            <nav class="nav nav-pills flex-column flex-sm-row navbar-light my-3">
-                <span class="navbar-brand" style="font-family: 'Oswald', sans-serif;">Категория: </span>
-                {% for category in categories %}
-                <a href="{% url 'category' category.slug %}" class="flex-sm-fill text-sm-center nav-link
-                {% if category.slug in request.path %} active {% endif %} ">{{ category.title }}</a>
-                {% endfor %}
-            </nav>
-        {% endif %}
-    </div>
-</div>
-
-<div class="row">
-{% for post in posts %}
-<div class="col-6 col-md-3 my-3">
-    {% if post.image %}
-    <div class="col-12">
-        <a href="{% url 'post_detail' post.slug %}">
-            <img src="{{ post.image_small.url }}" class="img-fluid img-thumbnail ">
-        </a>
-    </div>
-    {% endif %}
-    <div class="col-12 mt-3 mb-2 text-center">
-        <h3 class="h5">{{ post.title }}</h3>
-        <span class="small"><a href="{% url 'category' slug=post.category.slug %}">{{ post.category }}</a></span> |
-        <span class="small">Опубликованно: {{ post.post_date }}</span>
-        <br>
-
-    </div>
-
-    <div class="col-12 text-center">
-        <a href="{% url 'post_detail' post.slug %}" class="btn btn-sm btn-info"> Подробнее </a>
-    </div>
-</div>
-{% endfor %}
-</div>
-
+{% include "blog/blog-portfolio-category.html" %}
+{% include "blog/blog-portfolio-cards.html" %}
 {% endblock %}

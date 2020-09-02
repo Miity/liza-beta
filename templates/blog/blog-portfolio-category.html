@@ -1,0 +1,25 @@
+<div class="row mt-md-5 mb-md-3">
+    <div class="col-12 my-3 pl-5">
+        {% if view.get_category %}
+
+            <nav class="nav nav-pills flex-column flex-sm-row navbar-light my-3">
+                <span class="navbar-brand" style="font-family: 'Oswald', sans-serif;">Категория: </span>
+
+                {% for category in view.get_category %}
+                <a href="{% url 'category' category.slug %}" class="flex-sm-fill text-sm-center nav-link
+                {% if category.slug in request.path %} active {% endif %} ">{{ category.title }}</a>
+                {% endfor %}
+            </nav>
+        {% endif %}
+        {% if categories %}
+            <nav class="nav nav-pills flex-column flex-sm-row navbar-light my-3">
+                <span class="navbar-brand" style="font-family: 'Oswald', sans-serif;">Категория: </span>
+
+                {% for category in categories %}
+                <a href="{% url 'category' category.slug %}" class="flex-sm-fill text-sm-center nav-link
+                {% if category.slug in request.path %} active {% endif %} ">{{ category.title }}</a>
+                {% endfor %}
+            </nav>
+        {% endif %}
+    </div>
+</div>

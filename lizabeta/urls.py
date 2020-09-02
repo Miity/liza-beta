@@ -19,9 +19,10 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from blog.views import Post_by_Cat
- 
+from lizabeta.views import index
+
 urlpatterns = [
-    path('', Post_by_Cat.as_view(), name="index"),
+    path('', index, name="index"),
     path('admin/', admin.site.urls),
     path('blog/', include('blog.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
