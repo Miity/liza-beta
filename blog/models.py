@@ -34,9 +34,9 @@ class Post(models.Model):
                                  )
     image = models.ImageField("Главное фото", null=True, blank=True, upload_to=image_dir)
     image_small = ImageSpecField(source='image',
-                                 processors=[Thumbnail(width=400, height=None)],
+                                 processors=[Thumbnail(width=800, height=None)],
                                  format='JPEG',
-                                 options={'quality': 60})
+                                 options={'quality': 80})
     title = models.CharField("Название", max_length=200)
     content = RichTextUploadingField("Контент", null=True, blank=True)
     excert = models.TextField("Краткое описание", max_length=200, null=True, blank=True)
