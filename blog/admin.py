@@ -1,13 +1,19 @@
 # blog/admin.py
+from adminsortable2.admin import SortableInlineAdminMixin
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 
-from .models import Post, Category, Post_Gallery
+from .models import Post, Category, Post_Gallery, Inline_Editor
 
 
 
-class PostImageAdmin(admin.StackedInline):
+class PostImageAdmin(SortableInlineAdminMixin, admin.StackedInline):
     model = Post_Gallery
+    extra = 0
+
+class InlineEditor(SortableInlineAdminMixin, admin.StackedInline):
+    model = Inline_Editor
+    extra = 0
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
@@ -27,14 +33,14 @@ class PostAdmin(admin.ModelAdmin):
             "fields": (("category", "status"),)
         }),
         ("Пост", {
-            "fields": (("title",), ("slug",),("image", "content",))
+            "fields": (("title",), ("slug",),"image", "content",)
         }),)
 
     list_display_links = ("title",)
     search_fields = ("title", "category__title")
     list_editable = ("status",)
 
-    inlines = [PostImageAdmin]
+    inlines = [InlineEditor, PostImageAdmin, ]
 
     class Meta:
         model = Post

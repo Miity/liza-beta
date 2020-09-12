@@ -68,6 +68,20 @@ class Post_Gallery(models.Model):
                                  processors=[Thumbnail(150)],
                                  format='JPEG',
                                  options={'quality': 30})
+    order_num = models.PositiveSmallIntegerField(default=1)
+    class Meta:
+        ordering = ['order_num']
 
     def __str__(self):
         return self.post.title
+
+
+
+class Inline_Editor(models.Model):
+    post = models.ForeignKey(Post, default=None, on_delete=models.CASCADE)
+    htmlclass = models.TextField("HTML Class", max_length=200, null=True, blank=True)
+    body = RichTextUploadingField("Контент", null=True, blank=True)
+    order_num = models.PositiveSmallIntegerField(default=1)
+
+    class Meta:
+        ordering = ['order_num']
