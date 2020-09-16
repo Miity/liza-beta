@@ -1,0 +1,18 @@
+
+<div class="gallery" id="gallery">
+{% for post in post_list %}
+
+    {% if post.image %}
+    <a href="{% url 'post_detail' post.slug %}">
+     <div class="mb-1 pics">
+        <img class="img-fluid" src="{{ post.image_small.url }}" alt="Card image cap">
+     </div>
+    </a>
+    {% endif %}
+
+
+{% endfor %}
+</div>
+
+
+
