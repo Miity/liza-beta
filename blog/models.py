@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from ckeditor_uploader.fields import RichTextUploadingField
+from django.utils.safestring import mark_safe
 from imagekit.models import ImageSpecField
 from pilkit.processors import Thumbnail, ResizeToFill,ResizeToFit
 
@@ -22,6 +23,10 @@ def image_dir(instance, filename):
 
 
 class Post(models.Model):
+    STATUS = (
+        ('True', 'Опубликованно'),
+        ('False', 'Не опубликованно')
+    )
     post_date = models.DateTimeField("Дата создания", auto_now_add=True)
     update_at = models.DateTimeField('Дата обновленния', auto_now=True)
     category = models.ForeignKey(Category,
@@ -34,9 +39,9 @@ class Post(models.Model):
                                  )
     image = models.ImageField("Главное фото", null=True, blank=True, upload_to=image_dir)
     image_small = ImageSpecField(source='image',
-                                 processors=[Thumbnail(width=800, height=None)],
+                                 processors=[Thumbnail(width=600, height=None)],
                                  format='JPEG',
-                                 options={'quality': 80})
+                                 options={'quality': 60})
     title = models.CharField("Название", max_length=200)
     content = RichTextUploadingField("Контент", null=True, blank=True)
     excert = models.TextField("Краткое описание", max_length=200, null=True, blank=True)
@@ -53,6 +58,12 @@ class Post(models.Model):
     class Meta:
         ordering = ["-post_date", "title"]
 
+    @property
+    def image_preview(self):
+        if self.image:
+            return mark_safe('<img src="{}" width="100" />'.format(self.image.url))
+        return ""
+
 def gallery_dir(instance, filename):
     return 'post_gallery/{0}/{1}'.format(instance.post.slug, filename)
 
@@ -61,9 +72,9 @@ class Post_Gallery(models.Model):
     post = models.ForeignKey(Post, default=None, on_delete=models.CASCADE)
     image = models.ImageField(upload_to=gallery_dir)
     image_medium = ImageSpecField(source='image',
-                                 processors=[Thumbnail(700),],
+                                 processors=[Thumbnail(1200),],
                                  format='JPEG',
-                                 options={'quality': 60})
+                                 options={'quality': 80})
     image_small = ImageSpecField(source='image',
                                  processors=[Thumbnail(150)],
                                  format='JPEG',
@@ -75,11 +86,16 @@ class Post_Gallery(models.Model):
     def __str__(self):
         return self.post.title
 
+    @property
+    def image_preview(self):
+        if self.image:
+            return mark_safe('<img src="{}" width="100" />'.format(self.image.url))
+        return ""
 
 
 class Inline_Editor(models.Model):
     post = models.ForeignKey(Post, default=None, on_delete=models.CASCADE)
-    htmlclass = models.TextField("HTML Class", max_length=200, null=True, blank=True)
+    htmlclass = models.CharField("HTML Class", max_length=200, null=True, blank=True)
     body = RichTextUploadingField("Контент", null=True, blank=True)
     order_num = models.PositiveSmallIntegerField(default=1)
 
