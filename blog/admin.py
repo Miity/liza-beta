@@ -1,10 +1,9 @@
 # blog/admin.py
-from adminsortable2.admin import SortableInlineAdminMixin
+from adminsortable2.admin import SortableInlineAdminMixin, SortableAdminMixin
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 
 from .models import Post, Category, Post_Gallery, Inline_Editor
-
 
 
 class PostImageAdmin(SortableInlineAdminMixin, admin.TabularInline):
@@ -28,11 +27,23 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display_links = ("title",)
 
 @admin.register(Post)
-class PostAdmin(admin.ModelAdmin):
+class PostAdmin(SortableAdminMixin, admin.ModelAdmin):
     save_on_top = True
     save_as = True
-    list_display = ("id", "title", "category", "status", "post_date", "image")
+
     readonly_fields = ('image_preview',)
+
+    list_display = [
+                    "title",
+                    "category",
+                    "status",
+                    "post_date",
+                    "my_order",
+                    "image_preview",
+                    ]
+    list_editable = ("status",)
+    list_display_links = ("title",)
+
     fieldsets = (
         ('Параметры', {
             "classes": ("collapse"),
@@ -43,12 +54,8 @@ class PostAdmin(admin.ModelAdmin):
 
         }),)
 
-    list_display_links = ("title",)
     search_fields = ("title", "category__title")
-    list_editable = ("status",)
-
     inlines = [InlineEditor, PostImageAdmin, ]
-
     class Meta:
         model = Post
 
@@ -57,7 +64,6 @@ class PostAdmin(admin.ModelAdmin):
 
     image_preview.short_description = 'Thumbnail Preview'
     image_preview.allow_tags = True
-
 
 admin.site.site_title = "Liza Beta"
 admin.site.site_header = "Liza Beta"

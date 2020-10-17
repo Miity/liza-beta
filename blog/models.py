@@ -48,6 +48,10 @@ class Post(models.Model):
     slug = models.SlugField(max_length=150, db_index=True, null=True, blank=True, unique=True)
     status = models.BooleanField("Опубликовать?", default=True)
     comment_status = models.BooleanField("Можно комментировать?", default=True)
+    my_order = models.PositiveIntegerField(default=0, blank=False, null=False, editable=True)
+
+    class Meta(object):
+        ordering = ["my_order"]
 
     def __str__(self):
         return self.title
@@ -55,14 +59,14 @@ class Post(models.Model):
     def get_absolute_url(self):
         return reverse('post_detail', args=(self.slug,), )
 
-    class Meta:
-        ordering = ["-post_date", "title"]
-
     @property
     def image_preview(self):
         if self.image:
             return mark_safe('<img src="{}" width="100" />'.format(self.image.url))
         return ""
+
+
+
 
 def gallery_dir(instance, filename):
     return 'post_gallery/{0}/{1}'.format(instance.post.slug, filename)

@@ -11,6 +11,7 @@ def index(request):
     # Функция отображения для домашней страницы сайта.
     posts = Post.objects.all()
     categories = get_category(request)
+
     return render(
         request,
         'blog/blog-portfolio.html',

@@ -16,10 +16,6 @@ class CategoryList:
 class Post_by_Cat(ListView, CategoryList):
     model = Post
     template_name = "blog/blog-portfolio.html"
-    ordering = ['-post_date']
-
-    # def get_queryset(self):
-    #     return Post.objects.filter(category__slug=self.kwargs.get('slug')).filter(status=True)
 
     def get_context_data(self, *args, **kwargs):
         context = super(Post_by_Cat, self).get_context_data(*args, **kwargs)
