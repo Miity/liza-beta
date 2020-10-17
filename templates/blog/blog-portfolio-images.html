@@ -1,18 +1,26 @@
-
-<div class="gallery" id="gallery">
+<div class="row ">
 {% for post in post_list %}
 
-    {% if post.image %}
-    <a href="{% url 'post_detail' post.slug %}">
-     <div class="mb-1 pics">
-        <img class="img-fluid" src="{{ post.image_small.url }}" alt="Card image cap">
-     </div>
-    </a>
-    {% endif %}
+        {% if post.image %}
 
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 my-1 align-self-center">
+                <a href="{% url 'post_detail' post.slug %}">
+                    <div class=" textWithBlurredBg">
+                        <img src="{{ post.image_small.url }}" class="img-fluid">
+                        <div><h2>{{ post.title }}</h2>
+                        <span>Подробнее</span></div>
+                    </div>
+
+                </a>
+                <div class="w-100 h-20 float-right" >
+                    <small class="float-right ">{{ post.title }}</small>
+                </div>
+            </div>
+
+
+        {% endif %}
 
 {% endfor %}
 </div>
-
 
 
