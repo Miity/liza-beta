@@ -41,7 +41,7 @@ class Post_Detail(DetailView):
         post = self.object.id
         context['images'] = Post_Gallery.objects.filter(post=post)
         context['inlinetext'] = Inline_Editor.objects.filter(post=post)
-        context['next'] = Post.objects.filter(post_date__gt=self.object.post_date).order_by("post_date").first()
-        context['prev'] = Post.objects.filter(post_date__lt=self.object.post_date).order_by("-post_date").first()
+        context['next'] = Post.objects.filter(my_order__gt=self.object.my_order).order_by("my_order").first()
+        context['prev'] = Post.objects.filter(my_order__lt=self.object.my_order).order_by("-my_order").first()
         context['ckeditor_config'] = json.dumps(settings.CKEDITOR_CONFIGS["default"])
         return context

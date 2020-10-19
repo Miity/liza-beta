@@ -1,7 +1,7 @@
 {% load static %}
-
 <div class="pt-3 text-right">
     <span style="font-size: 18px;">
+        <a href="/admin/" class="icon mr-5" style="font-size:8px;">Админка</a>
         <a class="fa fa-facebook-square mr-2 icon" href="https://www.facebook.com/Lizabetaart/"></a>
         <a class="fa fa-instagram icon" href="https://www.instagram.com/liza_betaaa/"></a>
     </span>
@@ -21,13 +21,4 @@
 <!--    <a href="" class="nav-link" >Графика</a>-->
 <!--    <a href="" class="nav-link" >Видео</a>-->
 <!--    <a href="" class="nav-link" >Кто я?</a>-->
-
-    <hr>
-
-    {% if user.is_authenticated and user.is_superuser %}
-    <div class="pl-3">Здравствуй {{ user.username }}</div>
-    {% endif %}
-
-    <a href="/admin/" class="nav-link">Админка</a>
-
 </nav>
