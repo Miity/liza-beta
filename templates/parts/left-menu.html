@@ -13,11 +13,14 @@
     </div>
 
     <a href="{% url 'index' %}" class="nav-link" >Главная страница</a>
-    <a href="" class="nav-link" >Акварели</a>
-    <a href="" class="nav-link" >Футболки</a>
-    <a href="" class="nav-link" >Графика</a>
-    <a href="" class="nav-link" >Видео</a>
-    <a href="" class="nav-link" >Кто я?</a>
+    {% for menu in menu_title %}
+    <a href="{{ menu.url }}" class="nav-link">{{ menu.title }}</a>
+    {% endfor %}
+<!--    <a href="" class="nav-link" >Акварели</a>-->
+<!--    <a href="" class="nav-link" >Футболки</a>-->
+<!--    <a href="" class="nav-link" >Графика</a>-->
+<!--    <a href="" class="nav-link" >Видео</a>-->
+<!--    <a href="" class="nav-link" >Кто я?</a>-->
 
     <hr>
 

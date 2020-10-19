@@ -23,10 +23,6 @@ def image_dir(instance, filename):
 
 
 class Post(models.Model):
-    STATUS = (
-        ('True', 'Опубликованно'),
-        ('False', 'Не опубликованно')
-    )
     post_date = models.DateTimeField("Дата создания", auto_now_add=True)
     update_at = models.DateTimeField('Дата обновленния', auto_now=True)
     category = models.ForeignKey(Category,

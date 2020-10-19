@@ -3,7 +3,7 @@
         {% if view.get_category %}
 
             <nav class="nav nav-pills flex-column flex-sm-row navbar-light my-3">
-                <span class="navbar-brand" style="font-family: 'Oswald', sans-serif;">Категория: </span>
+                <span class="navbar-brand" style="font-family: 'Oswald', sans-serif;">Коллекция: </span>
 
                 {% for category in view.get_category %}
                 <a href="{% url 'category' category.slug %}" class="flex-sm-fill text-sm-center nav-link
@@ -13,7 +13,7 @@
         {% endif %}
         {% if categories %}
             <nav class="nav nav-pills flex-column flex-sm-row navbar-light my-3">
-                <span class="navbar-brand" style="font-family: 'Oswald', sans-serif;">Категория: </span>
+                <span class="navbar-brand" style="font-family: 'Oswald', sans-serif;">Коллекция: </span>
 
                 {% for category in categories %}
                 <a href="{% url 'category' category.slug %}" class="flex-sm-fill text-sm-center nav-link

@@ -2,7 +2,7 @@ import json
 from django.shortcuts import render, HttpResponse, get_object_or_404
 from django.conf import settings
 from django.views.generic import ListView, DetailView
-from .models import Post, Category, Post_Gallery
+from .models import Post, Category, Post_Gallery, Inline_Editor
 
 
 # Create your views here.
@@ -40,6 +40,7 @@ class Post_Detail(DetailView):
         context = super(Post_Detail, self).get_context_data(*args, **kwargs)
         post = self.object.id
         context['images'] = Post_Gallery.objects.filter(post=post)
+        context['inlinetext'] = Inline_Editor.objects.filter(post=post)
         context['next'] = Post.objects.filter(post_date__gt=self.object.post_date).order_by("post_date").first()
         context['prev'] = Post.objects.filter(post_date__lt=self.object.post_date).order_by("-post_date").first()
         context['ckeditor_config'] = json.dumps(settings.CKEDITOR_CONFIGS["default"])

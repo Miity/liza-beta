@@ -33,6 +33,7 @@
         </div>
     </div>
 </div>
+
 <div class="row justify-content-around">
     <div class="col-12 col-md-6  my-3" >
         <!-- Add images to <div class="fotorama"></div> -->
@@ -46,15 +47,20 @@
     </div>
     <div class="col-12 col-md-4 align-self-center">
         <div id="post-content">{{ post.content|safe }}</div>
-        <div id="ckeditor-div" style="display: none;">
-            <textarea
-                data-processed="0"
-                id="postcontentedit"
-                name = "postcontentedit"
-                data-config="{{ ckeditor_config }}">
-            </textarea>
-            <button id="save" action=" " type="button" class="btn btn-outline-info btn-sm right m-3">Save</button>
-        </div>
+<!--        <div id="ckeditor-div" style="display: none;">-->
+<!--&lt;!&ndash;            <textarea&ndash;&gt;-->
+<!--&lt;!&ndash;                data-processed="0"&ndash;&gt;-->
+<!--&lt;!&ndash;                id="postcontentedit"&ndash;&gt;-->
+<!--&lt;!&ndash;                name = "postcontentedit"&ndash;&gt;-->
+<!--&lt;!&ndash;                data-config="{{ ckeditor_config }}">&ndash;&gt;-->
+<!--&lt;!&ndash;            </textarea>&ndash;&gt;-->
+<!--&lt;!&ndash;            <button id="save" action=" " type="button" class="btn btn-outline-info btn-sm right m-3">Save</button>&ndash;&gt;-->
+<!--        </div>-->
+    </div>
+    <div class="col-12 col-md-8 m-5">
+        {% for text in inlinetext %}
+        {{ text.body|safe }}
+        {% endfor %}
     </div>
 </div>
 <hr class="m-5">
