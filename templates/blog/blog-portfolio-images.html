@@ -3,7 +3,7 @@
 
         {% if post.image %}
 
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 m-1 p-0 align-self-center">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 p-1 align-self-center">
                 <a href="{% url 'post_detail' post.slug %}">
                     <div class=" textWithBlurredBg">
                         <img src="{{ post.image_small.url }}" class="img-fluid">
