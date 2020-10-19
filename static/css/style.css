@@ -85,3 +85,7 @@ nav>a:hover {
 .textWithBlurredBg:hover :not(img){
     opacity:1;
 }
+
+.portfolio {
+  border: none;
+}
