@@ -20,10 +20,13 @@
 {% block content %}
 <div class="row">
     <div class="col mb-4">
-        <h2 class=" my-5 text-center" id="post-title" data-field-value="{{ post.title }}" data-id="{{ post.id }}">{{ post.title }}</h2>
+        <h2 class=" my-5 text-center" id="post-title"
+            data-field-value="{{ post.title }}" data-id="{{ post.id }}">{{ post.title }}</h2>
         <input class="form-control my-5" id="post-title-edit" style="display: none;"></input>
         <div class="text-center">
-            <span class="small">Коллекция: <a href="{% url 'category' slug=post.category.slug %}">{{ post.category }}</a></span>
+            <span class="small">Коллекция:
+                <a href="{% url 'category' slug=post.category.slug %}">{{ post.category }}</a>
+            </span>
             {% if user.is_authenticated and user.is_superuser %}
             | <span class="small"><a href="/admin/blog/post/{{post.id}}/change/" >Edit in admin</a></span>
             {% endif %}
@@ -31,7 +34,7 @@
     </div>
 </div>
 <div class="row justify-content-center">
-    <div class="col-12 col-md-7" >
+    <div class="col-12 col-md-8  m-5" >
         <!-- Add images to <div class="fotorama"></div> -->
          <div class="fotorama" id="post-fotorama" data-width="100%" data-ratio="3/4" data-nav="thumbs" data-allowfullscreen="true"
               data-transition="crossfade" data-keyboard="true" data-thumbwidth="120" data-thumbheight="120" data-thumbmargin="5">
@@ -41,7 +44,7 @@
 
          </div>
     </div>
-    <div class="col-12 col-md-5 px-5 my-4">
+    <div class="col-12 col-md-8 m-5">
         <div id="post-content">{{ post.content|safe }}</div>
         <div id="ckeditor-div" style="display: none;">
             <textarea
@@ -56,8 +59,6 @@
 </div>
 <hr class="m-5">
 <div class="row my-5">
-
-
         <div class="col-md-3 col-6 text-center">
             {% if next is not None %}
                 {% if next.image %}

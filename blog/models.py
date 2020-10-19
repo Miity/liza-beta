@@ -48,7 +48,7 @@ class Post(models.Model):
     slug = models.SlugField(max_length=150, db_index=True, null=True, blank=True, unique=True)
     status = models.BooleanField("Опубликовать?", default=True)
     comment_status = models.BooleanField("Можно комментировать?", default=True)
-    my_order = models.PositiveIntegerField(default=0, blank=False, null=False, editable=True)
+    my_order = models.PositiveIntegerField(default=0, blank=False, null=False, )
 
     class Meta(object):
         ordering = ["my_order"]
